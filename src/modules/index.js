@@ -1,0 +1,1 @@
+export { getName } from './getUsername';
