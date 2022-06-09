@@ -3,7 +3,14 @@ import * as readline from 'node:readline';
 import * as path from 'path';
 import { stdin as input, stdout as output } from 'node:process';
 
-import { getName, getHomeDirectory, sayGoodbye, changeCurrentDirectory, showCurrentDir } from './modules/index.js';
+import {
+    getName,
+    getHomeDirectory,
+    sayGoodbye,
+    changeCurrentDirectory,
+    showCurrentDir,
+    showDirectoryContains 
+} from './modules/index.js';
 
 const rl = readline.createInterface({ input, output });
 
@@ -27,6 +34,10 @@ function start () {
                 break;
             case 'cd':
                 currentDirectory = changeCurrentDirectory(currentDirectory,command[0], command[1]);
+                showCurrentDir(currentDirectory);
+                break;
+            case 'ls':
+                showDirectoryContains(currentDirectory);
                 showCurrentDir(currentDirectory);
                 break;
             default:

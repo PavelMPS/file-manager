@@ -6,20 +6,21 @@ export function changeCurrentDirectory(
   action,
   desiredDirectory
 ) {
+ 
   switch (action) {
     case "up": {
       const newPath = path.join(currentDirectory, "..");
       return newPath;
     }
     case "cd": {
-      fs.access(path.join(currentDirectory, desiredDirectory), (err) => {
-        if (err) {
-          console.log("Operation error!");
-          return currentDirectory;
-        }     
-      });
-      const newPath = path.join(currentDirectory, desiredDirectory);
-        return newPath;
+      const isFolder = fs.existsSync(path.join(currentDirectory, desiredDirectory));
+      if (isFolder) {
+        const pathToDir = path.join(currentDirectory, desiredDirectory);
+        return pathToDir;
+      } else {
+        console.error('Folder is not exist!');
+        return currentDirectory;
+      }     
     }
     default: {
       console.log("default");
