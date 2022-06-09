@@ -1,32 +1,45 @@
-// npm run start -- --username=your_username
+// npm run start -- --username=Pavel
 import * as readline from 'node:readline';
+import * as path from 'path';
 import { stdin as input, stdout as output } from 'node:process';
 
-import { getName } from "./modules/getUsername.js";
+import { getName, getHomeDirectory, sayGoodbye, changeCurrentDirectory, showCurrentDir } from './modules/index.js';
 
 const rl = readline.createInterface({ input, output });
-const name = getName(process.argv);
 
-function closeAndSayGoodbye() {
-    process.stdout.write(`Thank you for using File Manager, ${name}!`);
-    rl.close();
+function start () {
+    const name = getName(process.argv);
+    const homeDirectory = getHomeDirectory();
+    let currentDirectory = homeDirectory;
+
+    process.stdout.write(`Welcome to the File Manager, ${name}!\n`);
+    showCurrentDir(currentDirectory);
+    
+    rl.on('line', (input) => {
+        const command = input.split(' ');
+        switch (command[0]) {
+            case '.exit': 
+                sayGoodbye(rl, name);
+                break;
+            case 'up':
+                currentDirectory = changeCurrentDirectory(currentDirectory, command[0]);
+                showCurrentDir(currentDirectory);
+                break;
+            case 'cd':
+                currentDirectory = changeCurrentDirectory(currentDirectory,command[0], command[1]);
+                showCurrentDir(currentDirectory);
+                break;
+            default:
+                process.stdout.write('Invalid input');
+                break;
+        }
+    
+      });
+       
+    rl.on('SIGINT', () => {
+       sayGoodbye(rl, name);
+    })
+    
 }
 
-rl.on('line', (input) => {
-    console.log(`Received: ${input}`);
-    switch (input) {
-        case '.exit': 
-            closeAndSayGoodbye();
-            break;
-        default:
-            console.log('Invalid input');
-            break;
-    }
-  });
-
-process.stdout.write(`Welcome to the File Manager, ${name}!\n`);
-
-rl.on('SIGINT', () => {
-   closeAndSayGoodbye();
-})
-
+start();
