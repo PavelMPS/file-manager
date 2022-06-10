@@ -8,11 +8,9 @@ export async function copyTheFile(currentPath, pathToFile, newDirectoryPath) {
 
     if (fs.existsSync(source)) {
         if (fs.existsSync(destination)) {
-            fs.copyFile(source, path.join(destination, fileToCopy), err => {
-                if (err) {
-                    console.error('FS operation failed');
-                }
-            })
+            const rs = fs.createReadStream(source);
+            const ws = fs.createWriteStream(path.join(destination, fileToCopy));
+            rs.pipe(ws);
         } else {
             console.error('Folder of destination do not exist!');
         }
