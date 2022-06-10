@@ -9,6 +9,7 @@ import {
     sayGoodbye,
     readTheFile,
     copyTheFile,
+    moveTheFile,
     createNewFile,
     renameTheFile,
     deleteTheFile,
@@ -59,6 +60,10 @@ function start () {
                 break;
             case 'cp':
                 copyTheFile(currentPath, command[1], command[2]);
+                showCurrentDir(currentPath);
+                break;
+            case 'mv':
+                moveTheFile(currentPath, command[1], command[2]);
                 showCurrentDir(currentPath);
                 break;
             case 'rm':

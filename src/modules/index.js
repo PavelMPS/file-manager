@@ -9,3 +9,4 @@ export { createNewFile } from './createFile.js';
 export { renameTheFile } from './renameFile.js';
 export { copyTheFile } from './copyFile.js';
 export { deleteTheFile } from './deleteFile.js';
+export { moveTheFile } from './moveFile.js';

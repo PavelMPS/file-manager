@@ -1,9 +1,9 @@
 import * as fs from "fs";
 import * as path from "path";
 
-export async function copyTheFile(currentPath, pathToFile, newPathTofile) {
+export async function copyTheFile(currentPath, pathToFile, newDirectoryPath) {
     const source = path.isAbsolute(pathToFile) ? pathToFile : path.join(currentPath, pathToFile);
-    const destination = path.isAbsolute(newPathTofile) ? newPathTofile : path.join(currentPath, newPathTofile);
+    const destination = path.isAbsolute(newDirectoryPath) ? newDirectoryPath : path.join(currentPath, newDirectoryPath);
     const fileToCopy = source.slice(source.lastIndexOf('\\') + 1);
 
     if (fs.existsSync(source)) {
