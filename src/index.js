@@ -9,6 +9,7 @@ import {
     sayGoodbye,
     readTheFile,
     createNewFile,
+    renameTheFile,
     showCurrentDir,
     getHomeDirectory,
     showDirectoryContains,
@@ -42,7 +43,6 @@ function start () {
                 break;
             case 'ls':
                 showDirectoryContains(currentPath);
-                showCurrentDir(currentPath);
                 break;
             case 'cat':
                 readTheFile(currentPath, command[1]);
@@ -50,6 +50,9 @@ function start () {
             case 'add':
                 createNewFile(currentPath, command[1]);
                 showCurrentDir(currentPath);
+                break;
+            case 'rn':
+                renameTheFile(currentPath, command[1], command[2]);
                 break;
             default:
                 process.stdout.write('Invalid input');
