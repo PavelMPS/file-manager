@@ -11,6 +11,7 @@ import {
     copyTheFile,
     createNewFile,
     renameTheFile,
+    deleteTheFile,
     showCurrentDir,
     getHomeDirectory,
     showDirectoryContains,
@@ -54,12 +55,19 @@ function start () {
                 break;
             case 'rn':
                 renameTheFile(currentPath, command[1], command[2]);
+                showCurrentDir(currentPath);
                 break;
             case 'cp':
                 copyTheFile(currentPath, command[1], command[2]);
+                showCurrentDir(currentPath);
+                break;
+            case 'rm':
+                deleteTheFile(currentPath, command[1]);
+                showCurrentDir(currentPath);
                 break;
             default:
-                process.stdout.write('Invalid input');
+                process.stdout.write('Invalid input' + '\n');
+                showCurrentDir(currentPath);
                 break;
         }
     
