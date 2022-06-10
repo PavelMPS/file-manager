@@ -8,6 +8,7 @@ import {
     getName, 
     sayGoodbye,
     readTheFile,
+    createNewFile,
     showCurrentDir,
     getHomeDirectory,
     showDirectoryContains,
@@ -20,10 +21,10 @@ function start () {
     os.homedir();
     const name = getName(process.argv);
     const homeDirectory = getHomeDirectory();
-    let currentDirectory = homeDirectory;
+    let currentPath = homeDirectory;
 
     process.stdout.write(`Welcome to the File Manager, ${name}!\n`);
-    showCurrentDir(currentDirectory);
+    showCurrentDir(currentPath);
     
     rl.on('line', (input) => {
         const command = input.split(' ');
@@ -32,19 +33,23 @@ function start () {
                 sayGoodbye(rl, name);
                 break;
             case 'up':
-                currentDirectory = changeCurrentDirectory(currentDirectory, command[0]);
-                showCurrentDir(currentDirectory);
+                currentPath = changeCurrentDirectory(currentPath, command[0]);
+                showCurrentDir(currentPath);
                 break;
             case 'cd':
-                currentDirectory = changeCurrentDirectory(currentDirectory,command[0], command[1]);
-                showCurrentDir(currentDirectory);
+                currentPath = changeCurrentDirectory(currentPath,command[0], command[1]);
+                showCurrentDir(currentPath);
                 break;
             case 'ls':
-                showDirectoryContains(currentDirectory);
-                showCurrentDir(currentDirectory);
+                showDirectoryContains(currentPath);
+                showCurrentDir(currentPath);
                 break;
             case 'cat':
-                readTheFile(currentDirectory, command[1]);
+                readTheFile(currentPath, command[1]);
+                break;
+            case 'add':
+                createNewFile(currentPath, command[1]);
+                showCurrentDir(currentPath);
                 break;
             default:
                 process.stdout.write('Invalid input');

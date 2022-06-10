@@ -3,9 +3,11 @@ import * as path from "path";
 import { showCurrentDir } from "../modules/index.js";
 
 export async function readTheFile(currentPath, fileName) {
-    const isFile = fs.existsSync(path.join(currentPath, fileName));
+    const filePath = path.join(currentPath, fileName);
+    const isFile = fs.existsSync(filePath);
+    
     if (isFile) {
-        const readStream = fs.createReadStream(path.join(currentPath, fileName), 'utf-8');
+        const readStream = fs.createReadStream(filePath, 'utf-8');
         readStream.on('data', chunk => {
             process.stdout.write(chunk);
         });
