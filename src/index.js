@@ -1,20 +1,23 @@
 // npm run start -- --username=Pavel
 import * as readline from 'node:readline';
 import * as path from 'path';
+import * as os from 'os';
 import { stdin as input, stdout as output } from 'node:process';
 
 import {
-    getName,
-    getHomeDirectory,
+    getName, 
     sayGoodbye,
-    changeCurrentDirectory,
+    readTheFile,
     showCurrentDir,
-    showDirectoryContains 
+    getHomeDirectory,
+    showDirectoryContains,
+    changeCurrentDirectory,
 } from './modules/index.js';
 
 const rl = readline.createInterface({ input, output });
 
 function start () {
+    os.homedir();
     const name = getName(process.argv);
     const homeDirectory = getHomeDirectory();
     let currentDirectory = homeDirectory;
@@ -39,6 +42,9 @@ function start () {
             case 'ls':
                 showDirectoryContains(currentDirectory);
                 showCurrentDir(currentDirectory);
+                break;
+            case 'cat':
+                readTheFile(currentDirectory, command[1]);
                 break;
             default:
                 process.stdout.write('Invalid input');
