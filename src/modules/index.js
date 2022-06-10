@@ -7,3 +7,4 @@ export { showDirectoryContains } from './list.js';
 export { readTheFile } from './readFile.js';
 export { createNewFile } from './createFile.js';
 export { renameTheFile } from './renameFile.js';
+export { copyTheFile } from './copyFile.js';

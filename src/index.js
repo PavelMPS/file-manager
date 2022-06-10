@@ -8,6 +8,7 @@ import {
     getName, 
     sayGoodbye,
     readTheFile,
+    copyTheFile,
     createNewFile,
     renameTheFile,
     showCurrentDir,
@@ -53,6 +54,9 @@ function start () {
                 break;
             case 'rn':
                 renameTheFile(currentPath, command[1], command[2]);
+                break;
+            case 'cp':
+                copyTheFile(currentPath, command[1], command[2]);
                 break;
             default:
                 process.stdout.write('Invalid input');
