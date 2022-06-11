@@ -19,6 +19,15 @@ import {
   changeCurrentDirectory,
 } from "./modules/index.js";
 
+import {
+  showArcitecture,
+  showUsername,
+  showHomedir,
+  showCpus,
+  showEOL,
+ } from "./modules/os/index.js";
+import { calcHash } from "./modules/hash/calculateHash.js";
+
 const rl = readline.createInterface({ input, output });
 
 function start() {
@@ -74,6 +83,24 @@ function start() {
         deleteTheFile(currentPath, command[1]);
         showCurrentDir(currentPath);
         break;
+      case "os":
+        if (command[1] === "--architecture") {
+          showArcitecture();
+        } else if (command[1] === "--username") {
+          showUsername();
+        } else if (command[1] === "--EOL") {
+          showEOL();
+        } else if (command[1] === "--cpus") {
+          showCpus();
+        } else if (command[1] === "--homedir") {
+          showHomedir();
+        }
+        showCurrentDir(currentPath);
+        break;  
+      case "hash":
+        calcHash(currentPath, command[1]);
+        showCurrentDir(currentPath);
+        break;   
       default:
         process.stdout.write("Invalid input" + "\n");
         showCurrentDir(currentPath);
