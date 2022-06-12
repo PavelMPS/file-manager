@@ -2,19 +2,23 @@ import * as fs from "fs";
 import * as path from "path";
 
 export async function copyTheFile(currentPath, pathToFile, newDirectoryPath) {
-    const source = path.isAbsolute(pathToFile) ? pathToFile : path.join(currentPath, pathToFile);
-    const destination = path.isAbsolute(newDirectoryPath) ? newDirectoryPath : path.join(currentPath, newDirectoryPath);
-    const fileToCopy = source.slice(source.lastIndexOf('\\') + 1);
+  const source = path.isAbsolute(pathToFile)
+    ? pathToFile
+    : path.join(currentPath, pathToFile);
+  const destination = path.isAbsolute(newDirectoryPath)
+    ? newDirectoryPath
+    : path.join(currentPath, newDirectoryPath);
+  const fileToCopy = source.slice(source.lastIndexOf("\\") + 1);
 
-    if (fs.existsSync(source)) {
-        if (fs.existsSync(destination)) {
-            const rs = fs.createReadStream(source);
-            const ws = fs.createWriteStream(path.join(destination, fileToCopy));
-            rs.pipe(ws);
-        } else {
-            console.error('Folder of destination do not exist!');
-        }
+  if (fs.existsSync(source)) {
+    if (fs.existsSync(destination)) {
+      const rs = fs.createReadStream(source);
+      const ws = fs.createWriteStream(path.join(destination, fileToCopy));
+      rs.pipe(ws);
     } else {
-        console.error('File do not exist!');
+      console.error("Folder of destination do not exist!");
     }
+  } else {
+    console.error("File do not exist!");
+  }
 }

@@ -25,8 +25,10 @@ import {
   showHomedir,
   showCpus,
   showEOL,
- } from "./modules/os/index.js";
+} from "./modules/os/index.js";
 import { calcHash } from "./modules/hash/calculateHash.js";
+import { compressFile } from "./modules/zip/compress.js";
+import { decompressFile } from "./modules/zip/decompress.js";
 
 const rl = readline.createInterface({ input, output });
 
@@ -39,7 +41,7 @@ function start() {
   process.stdout.write(`Welcome to the File Manager, ${name}!\n`);
   showCurrentDir(currentPath);
 
-  rl.on("line", (input) => {
+  rl.on("line", async (input) => {
     const command = input.split(" ");
     switch (command[0]) {
       case ".exit":
@@ -96,11 +98,29 @@ function start() {
           showHomedir();
         }
         showCurrentDir(currentPath);
-        break;  
+        break;
       case "hash":
         calcHash(currentPath, command[1]);
         showCurrentDir(currentPath);
-        break;   
+        break;
+      case "compress":
+        if (command[1] === undefined || command[2] === undefined) {
+          console.error("Invalid input");
+          break;
+        } else {
+          await compressFile(currentPath, command[1], command[2]);
+          showCurrentDir(currentPath);
+          break;
+        }
+      case "decompress":
+        if (command[1] === undefined || command[2] === undefined) {
+          console.error("Invalid input");
+          break;
+        } else {
+          await decompressFile(currentPath, command[1], command[2]);
+          showCurrentDir(currentPath);
+          break;
+        }
       default:
         process.stdout.write("Invalid input" + "\n");
         showCurrentDir(currentPath);
