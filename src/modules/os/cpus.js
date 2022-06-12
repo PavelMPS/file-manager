@@ -4,9 +4,7 @@ export function showCpus() {
   const newArr = [];
   os.cpus().map((cpu) => {
     const model = cpu.model;
-    const speed = cpu.speed.toString();
-    let cpuSpeed;
-    cpuSpeed = `${speed.slice(0, 1)},${speed.slice(1)} GHz`;
+    const cpuSpeed = `${cpu.speed / 1000} GHz`;
     const cpuInfo = { model, cpuSpeed };
     newArr.push(cpuInfo);
   });
