@@ -1,0 +1,12 @@
+export { getName } from './getUsername.js';
+export { getHomeDirectory } from './homeDirectory.js';
+export { sayGoodbye } from './sayGoodbye.js';
+export { changeCurrentDirectory } from './changeDirectory.js';
+export { showCurrentDir } from './showCurrentDirectory.js';
+export { showDirectoryContains } from './list.js';
+export { readTheFile } from './readFile.js';
+export { createNewFile } from './createFile.js';
+export { renameTheFile } from './renameFile.js';
+export { copyTheFile } from './copyFile.js';
+export { deleteTheFile } from './deleteFile.js';
+export { moveTheFile } from './moveFile.js';

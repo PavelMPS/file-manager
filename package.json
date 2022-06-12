@@ -1,0 +1,10 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "This is my first file manager",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "pavelmps"
+}
