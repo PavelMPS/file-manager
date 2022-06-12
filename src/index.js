@@ -1,4 +1,3 @@
-// npm run start -- --username=Pavel
 import * as readline from "node:readline";
 import * as path from "path";
 import * as os from "os";
@@ -52,37 +51,66 @@ function start() {
         showCurrentDir(currentPath);
         break;
       case "cd":
-        currentPath = changeCurrentDirectory(
-          currentPath,
-          command[0],
-          command[1]
-        );
+        if (command[1]) {
+          currentPath = changeCurrentDirectory(
+            currentPath,
+            command[0],
+            command[1]
+          );
+        } else {
+          console.error("Invalid input");
+        }       
         showCurrentDir(currentPath);
         break;
       case "ls":
         showDirectoryContains(currentPath);
         break;
       case "cat":
-        readTheFile(currentPath, command[1]);
+        if (command[1]) {
+          await readTheFile(currentPath, command[1]);
+        } else {
+          console.error("Invalid input");
+        }
+        showCurrentDir(currentPath);
         break;
       case "add":
-        createNewFile(currentPath, command[1]);
+        if (command[1]) {
+          await createNewFile(currentPath, command[1]);
+        } else {
+          console.error("Invalid input");
+        }        
         showCurrentDir(currentPath);
         break;
       case "rn":
-        renameTheFile(currentPath, command[1], command[2]);
+        if (command[1] === undefined || command[2] === undefined) {
+          console.error("Invalid input");
+        } else {
+          renameTheFile(currentPath, command[1], command[2]);
+        }       
         showCurrentDir(currentPath);
         break;
       case "cp":
-        copyTheFile(currentPath, command[1], command[2]);
+        if (command[1] === undefined || command[2] === undefined) {
+          console.error("Invalid input");
+        } else {
+          copyTheFile(currentPath, command[1], command[2]);
+        }       
         showCurrentDir(currentPath);
         break;
       case "mv":
-        moveTheFile(currentPath, command[1], command[2]);
+        if (command[1] === undefined || command[2] === undefined) {
+          console.error("Invalid input");      
+        } else {
+          moveTheFile(currentPath, command[1], command[2]);
+        }        
         showCurrentDir(currentPath);
         break;
       case "rm":
-        deleteTheFile(currentPath, command[1]);
+        if (command[1]) {
+          deleteTheFile(currentPath, command[1]);
+        } else {
+          console.error("Invalid input");
+        }      
         showCurrentDir(currentPath);
         break;
       case "os":
@@ -96,11 +124,17 @@ function start() {
           showCpus();
         } else if (command[1] === "--homedir") {
           showHomedir();
+        } else {
+          console.error("Invalid input");
         }
         showCurrentDir(currentPath);
         break;
       case "hash":
-        calcHash(currentPath, command[1]);
+        if (command[1]) {
+          calcHash(currentPath, command[1]);
+        } else {
+          console.error("Invalid input");
+        }      
         showCurrentDir(currentPath);
         break;
       case "compress":

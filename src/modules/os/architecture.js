@@ -1,5 +1,5 @@
-import * as os from 'os';
+import * as os from "os";
 
 export function showArcitecture() {
-    console.log(os.arch());
+  console.log(os.arch());
 }

@@ -1,5 +1,5 @@
-import * as os from 'os';
+import * as os from "os";
 
 export function showHomedir() {
-    console.log(os.homedir());
+  console.log(os.homedir());
 }

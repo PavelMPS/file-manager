@@ -1,5 +1,5 @@
-import * as os from 'os';
+import * as os from "os";
 
 export function showUsername() {
-    console.log(os.userInfo().username);
+  console.log(os.userInfo().username);
 }
